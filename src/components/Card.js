@@ -9,11 +9,16 @@ const { width } = Dimensions.get("window");
 const Card = ({ image, text, is_favorite, action }) => {
   const icon = is_favorite ? "heart" : "heart-o";
   return (
-    <TouchableOpacity onPress={action}>
+    <TouchableOpacity onPress={action} testID={"card-" + text}>
       <View style={styles.card}>
         <Text style={styles.text}>{text}</Text>
         <Image source={image} resizeMode={"contain"} style={styles.image} />
-        <Icon name={icon} size={30} color={"#333"} />
+        <Icon
+          name={icon}
+          size={30}
+          color={"#333"}
+          testID={"card-" + text + "-" + icon}
+        />
       </View>
     </TouchableOpacity>
   );
@@ -40,7 +45,7 @@ const styles = {
 };
 
 Card.propTypes = {
-  image: PropTypes.number.isRequired,
+  image: PropTypes.object.isRequired,
   text: PropTypes.string.isRequired,
   is_favorite: PropTypes.bool.isRequired,
   action: PropTypes.func.isRequired
